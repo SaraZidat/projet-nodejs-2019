@@ -1,10 +1,12 @@
 const { Router } = require('express');
+const usersRouter = require('../modules/users/router');
 const listsRouter = require('../modules/lists/router');
 const tasksRouter = require('../modules/tasks/router');
 
 const router = new Router();
 
 // Service  API
+router.use('/api', usersRouter);
 router.use('/api', listsRouter);
 router.use('/api', tasksRouter);
 // End of service API
