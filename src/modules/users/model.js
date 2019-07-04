@@ -1,19 +1,18 @@
 const joi = require('@hapi/joi');
 
 const createModel = joi.object().keys({
-  firstname: joi.string().required(),
-  lastname: joi.string().required(),
-  password: joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
-  email: joi.string().email({ minDomainSegments: 2 }),
-});
-
-const updateModel = joi.object().keys({
+  password: joi.string().required(),
+  email: joi.string().email().required(),
   firstname: joi.string(),
   lastname: joi.string(),
-  password: joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
-  email: joi.string().email({ minDomainSegments: 2 }),
-});
+}).with('firstname', 'lastname');
 
+const updateModel = joi.object().keys({
+  password: joi.string(),
+  email: joi.string().email(),
+  firstname: joi.string(),
+  lastname: joi.string(),
+}).with('firstname', 'lastname');
 
 module.exports = {
   createModel,

@@ -1,20 +1,20 @@
 const { Router } = require('express');
+const findOneById = require('./middleware/findOneById');
+const updateOneById = require('./middleware/updateOneById');
 const find = require('./middleware/find');
-const findOne = require('./middleware/findOne');
 const createOne = require('./middleware/createOne');
-const deleteOne = require('./middleware/deleteOne');
-const updateOne = require('./middleware/updateOne');
+const deleteOneById = require('./middleware/deleteOneById');
 
 const router = new Router();
 
 router.route('/users')
-  .post(createOne)
-  .get(find);
+  .get(find)
+  .post(createOne);
 
-router.route('/lists/:listId/tasks/:taskId')
-  .delete(deleteOne)
-  .patch(updateOne)
-  .get(findOne);
+router.route('/users/:userId')
+  .get(findOneById)
+  .patch(updateOneById)
+  .delete(deleteOneById);
 
 
 module.exports = router;
